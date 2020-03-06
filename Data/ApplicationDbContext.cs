@@ -16,9 +16,9 @@ namespace APICasadeshow.Data
 
         }
         public DbSet<CasaDeShow> CasaDeShow { get; set; }
-        public DbSet<Evento> Evento { get; set; }
         public DbSet<Genero> Genero { get; set; }
-        public DbSet<Compra> Compra { get; set; }
+        public DbSet<Evento> Evento { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Compra> Compra { get; set; }
     }
 }

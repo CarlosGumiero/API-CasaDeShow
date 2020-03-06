@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APICasadeshow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200305120127_Database")]
+    [Migration("20200306162113_Database")]
     partial class Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,20 +48,20 @@ namespace APICasadeshow.Migrations
                     b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.Property<int>("QtdIngressos")
                         .HasColumnType("int");
 
                     b.Property<float>("Total")
                         .HasColumnType("float");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("CompraId");
 
                     b.HasIndex("EventoId");
 
-                    b.HasIndex("IdentityUserId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Compra");
                 });
@@ -139,67 +139,15 @@ namespace APICasadeshow.Migrations
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityUser");
-                });
-
             modelBuilder.Entity("APICasadeshow.Models.Compra", b =>
                 {
                     b.HasOne("APICasadeshow.Models.Evento", "Evento")
                         .WithMany()
                         .HasForeignKey("EventoId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                    b.HasOne("APICasadeshow.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId");
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("APICasadeshow.Models.Evento", b =>

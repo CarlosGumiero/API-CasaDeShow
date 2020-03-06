@@ -10,6 +10,6 @@ namespace APICasadeshow.Models
         public int QtdIngressos {get; set;}
         public float Total {get; set;}
         public Evento Evento {get; set;}
-        public IdentityUser IdentityUser {get; set;}
+        public Usuario Usuario {get; set;}
     }
 }

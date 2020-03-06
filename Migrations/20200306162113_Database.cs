@@ -36,31 +36,6 @@ namespace APICasadeshow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    NormalizedUserName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    NormalizedEmail = table.Column<string>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityUser", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -98,13 +73,13 @@ namespace APICasadeshow.Migrations
                         column: x => x.CasaDeShowId,
                         principalTable: "CasaDeShow",
                         principalColumn: "CasaDeShowId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Evento_Genero_GeneroId",
                         column: x => x.GeneroId,
                         principalTable: "Genero",
                         principalColumn: "GeneroId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +92,7 @@ namespace APICasadeshow.Migrations
                     QtdIngressos = table.Column<int>(nullable: false),
                     Total = table.Column<float>(nullable: false),
                     EventoId = table.Column<int>(nullable: true),
-                    IdentityUserId = table.Column<string>(nullable: true)
+                    UsuarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,13 +102,13 @@ namespace APICasadeshow.Migrations
                         column: x => x.EventoId,
                         principalTable: "Evento",
                         principalColumn: "EventoId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Compra_IdentityUser_IdentityUserId",
-                        column: x => x.IdentityUserId,
-                        principalTable: "IdentityUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Compra_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuario",
+                        principalColumn: "UsuarioId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -142,9 +117,9 @@ namespace APICasadeshow.Migrations
                 column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Compra_IdentityUserId",
+                name: "IX_Compra_UsuarioId",
                 table: "Compra",
-                column: "IdentityUserId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Evento_CasaDeShowId",
@@ -163,13 +138,10 @@ namespace APICasadeshow.Migrations
                 name: "Compra");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
-
-            migrationBuilder.DropTable(
                 name: "Evento");
 
             migrationBuilder.DropTable(
-                name: "IdentityUser");
+                name: "Usuario");
 
             migrationBuilder.DropTable(
                 name: "CasaDeShow");

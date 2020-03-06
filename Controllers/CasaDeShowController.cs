@@ -11,7 +11,6 @@ namespace APICasadeshow.Controllers
 {
     [Route("apicasadeshow/v1/[controller]")]
     [ApiController]
-    // [Authorize(Roles = "administrador")]
     public class CasaDeShowController : ControllerBase
     {
         private readonly Data.ApplicationDbContext database;
@@ -60,33 +59,43 @@ namespace APICasadeshow.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] CasaTemp ctemp)
         {
-            // validation
-            if (ctemp.Nome.Length <= 3)
+            try
             {
-                Response.StatusCode = 400;
-                return new ObjectResult(new { msg = "Nome precisa de mais de 3 caracteres." });
-            }
+                // validation
+                if (ctemp.Nome.Length <= 3)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult(new { msg = "Nome precisa de mais de 3 caracteres." });
+                }
 
-            if (ctemp.Endereco.Length <= 3)
+                if (ctemp.Endereco.Length <= 3)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult(new { msg = "Endereço precisa de mais de 3 caracteres." });
+                }
+
+                CasaDeShow c = new CasaDeShow();
+
+                c.Nome = ctemp.Nome;
+                c.Endereco = ctemp.Endereco;
+                database.CasaDeShow.Add(c);
+                database.SaveChanges();
+
+                Response.StatusCode = 201;
+                return new ObjectResult("Casa de show criada!");
+            }
+            catch (Exception)
             {
-                Response.StatusCode = 400;
-                return new ObjectResult(new { msg = "Endereço precisa de mais de 3 caracteres." });
+                Response.StatusCode = 404;
+                return new ObjectResult("Casa de show inválida!");
             }
-
-            CasaDeShow c = new CasaDeShow();
-
-            c.Nome = ctemp.Nome;
-            c.Endereco = ctemp.Endereco;
-            database.CasaDeShow.Add(c);
-            database.SaveChanges();
-
-            Response.StatusCode = 201;
-            return new ObjectResult("");
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
@@ -100,11 +109,12 @@ namespace APICasadeshow.Controllers
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("");
+                return new ObjectResult("Casa de show inválida");
             }
         }
 
         [HttpPatch]
+        [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] CasaDeShow casadeshow)
         {
             if (casadeshow.CasaDeShowId > 0)

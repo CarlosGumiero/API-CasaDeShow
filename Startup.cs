@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace APICasadeshow
 {
@@ -56,7 +57,24 @@ namespace APICasadeshow
             // Swagger
             services.AddSwaggerGen(config =>
             {
-                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API DE CASA DE SHOW", Version = "v1" });
+                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "API DE CASA DE SHOW",
+                    Version = "v1",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
             });
         }
 
@@ -87,6 +105,7 @@ namespace APICasadeshow
             app.UseSwaggerUI(config => //Views HTML do Swagger
             {
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs");
+                // config.RoutePrefix = string.Empty;
             });
         }
     }

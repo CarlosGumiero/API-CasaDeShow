@@ -5,6 +5,7 @@ using APICasadeshow.Models;
 using Microsoft.AspNetCore.Mvc;
 using APICasadeshow.Hateoas;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APICasadeshow.Controllers
 {
@@ -59,6 +60,7 @@ namespace APICasadeshow.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] GeneroTemp gtemp)
         {
             // validation
@@ -75,10 +77,11 @@ namespace APICasadeshow.Controllers
             database.SaveChanges();
 
             Response.StatusCode = 201;
-            return new ObjectResult("");
+            return new ObjectResult("Gênero criado com sucesso!");
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
@@ -86,17 +89,17 @@ namespace APICasadeshow.Controllers
                 Genero genero = database.Genero.First(x => x.GeneroId == id);
                 database.Genero.Remove(genero);
                 database.SaveChanges();
-
                 return Ok();
             }
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("");
+                return new ObjectResult("Gênero não encontrado!");
             }
         }
 
         [HttpPatch]
+        [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] Genero genero)
         {
             if (genero.GeneroId > 0)

@@ -5,6 +5,7 @@ using APICasadeshow.Models;
 using Microsoft.AspNetCore.Mvc;
 using APICasadeshow.Hateoas;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APICasadeshow.Controllers
 {
@@ -71,6 +72,7 @@ namespace APICasadeshow.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] EventoTemp eTemp)
         {
             database.CasaDeShow.ToList();
@@ -150,6 +152,7 @@ namespace APICasadeshow.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
@@ -167,6 +170,7 @@ namespace APICasadeshow.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] Evento evento)
         {
             if (evento.EventoId > 0)

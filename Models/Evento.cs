@@ -10,7 +10,6 @@ namespace APICasadeshow.Models
         public int Capacidade { get; set; }
         public float PrecoIngresso { get; set; }
         public CasaDeShow CasaDeShow { get; set; }
-
         public DateTime Data { get; set; }
         public int QtdIngresso { get; set; }
         public Genero Genero { get; set; }
