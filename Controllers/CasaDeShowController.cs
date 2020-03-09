@@ -25,6 +25,9 @@ namespace APICasadeshow.Controllers
             Hateoas.AddAction("EDIT_PRODUCT", "PATCH");
         }
 
+        ///<summary>
+        /// Listar todas as casas.
+        ///</summary>
         [HttpGet]
         public IActionResult Get()
         {
@@ -40,6 +43,9 @@ namespace APICasadeshow.Controllers
             return Ok(casadeshowsHateoas);
         }
 
+        ///<summary>
+        /// Listar casa de show por ID.
+        ///</summary>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -58,6 +64,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Criar casa de show.
+        ///</summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] CasaTemp ctemp)
@@ -94,6 +103,10 @@ namespace APICasadeshow.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Remove uma casa de show por ID.
+        /// </summary> 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
@@ -113,6 +126,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Editar uma casa de show por ID.
+        ///</summary>
         [HttpPatch]
         [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] CasaDeShow casadeshow)
@@ -162,17 +178,55 @@ namespace APICasadeshow.Controllers
             }
         }
 
-        public class CasaTemp
+        ///<summary>
+        /// Listar todas as casas em ordem crescente.
+        ///</summary>
+        [HttpGet("asc")]
+        public IActionResult Asc()
         {
-            public int CasaDeShowId { get; set; }
-            public string Nome { get; set; }
-            public string Endereco { get; set; }
+            var casadeshow = database.CasaDeShow.ToList();
+            return Ok(casadeshow.OrderBy(x => x.Nome));
         }
 
-        public class CasaDeShowContainer
+        ///<summary>
+        /// Listar todas as casas em ordem decrescente.
+        ///</summary>
+        [HttpGet("desc")]
+        public IActionResult Desc()
         {
-            public CasaDeShow casadeshow { get; set; }
-            public Link[] links { get; set; }
+            var casadeshow = database.CasaDeShow.ToList();
+            return Ok(casadeshow.OrderByDescending(x => x.Nome));
         }
+
+        ///<summary>
+        /// Listar uma casa passando um nome.
+        ///</summary>
+        [HttpGet("nome/" + "{nome}")]
+        public IActionResult Nome(string nomecasa)
+        {
+            try
+            {
+                CasaDeShow casadeshow = database.CasaDeShow.First(x => x.Nome == nomecasa);
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = 404;
+                return new ObjectResult("Compra não encontrada!");
+            }
+
+            return Ok(nomecasa);
+        }
+    }
+    public class CasaTemp
+    {
+        public int CasaDeShowId { get; set; }
+        public string Nome { get; set; }
+        public string Endereco { get; set; }
+    }
+
+    public class CasaDeShowContainer
+    {
+        public CasaDeShow casadeshow { get; set; }
+        public Link[] links { get; set; }
     }
 }

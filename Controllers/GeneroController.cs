@@ -26,6 +26,9 @@ namespace APICasadeshow.Controllers
 
         }
 
+        ///<summary>
+        /// Listar todos os gêneros.
+        ///</summary>
         [HttpGet]
         public IActionResult Get()
         {
@@ -41,6 +44,9 @@ namespace APICasadeshow.Controllers
             return Ok(generosHateoas);
         }
 
+        ///<summary>
+        /// Lista gênero por ID.
+        ///</summary>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -59,6 +65,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Criar gênero.
+        ///</summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] GeneroTemp gtemp)
@@ -80,6 +89,9 @@ namespace APICasadeshow.Controllers
             return new ObjectResult("Gênero criado com sucesso!");
         }
 
+        ///<summary>
+        /// Excluir gênero por ID.
+        ///</summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
@@ -98,6 +110,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Editar gênero por ID.
+        ///</summary>
         [HttpPatch]
         [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] Genero genero)
@@ -143,14 +158,14 @@ namespace APICasadeshow.Controllers
     }
 
     public class GeneroTemp
-        {
-            public int GeneroId { get; set; }
-            public string Nome { get; set; }
-        }
+    {
+        public int GeneroId { get; set; }
+        public string Nome { get; set; }
+    }
 
-        public class GeneroContainer
-        {
-            public Genero genero { get; set; }
-            public Link[] links { get; set; }
-        }
+    public class GeneroContainer
+    {
+        public Genero genero { get; set; }
+        public Link[] links { get; set; }
+    }
 }

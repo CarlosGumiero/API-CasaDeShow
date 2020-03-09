@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APICasadeshow</name>
+    </assembly>
+    <members>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Get">
+            <summary>
+             Listar todas as casas.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Get(System.Int32)">
+            <summary>
+             Listar casa de show por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Post(APICasadeshow.Controllers.CasaTemp)">
+            <summary>
+             Criar casa de show.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Delete(System.Int32)">
+            <summary>
+            Remove uma casa de show por ID.
+            </summary> 
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Patch(APICasadeshow.Models.CasaDeShow)">
+            <summary>
+             Editar uma casa de show por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Asc">
+            <summary>
+             Listar todas as casas em ordem crescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Desc">
+            <summary>
+             Listar todas as casas em ordem decrescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CasaDeShowController.Nome(System.String)">
+            <summary>
+             Listar uma casa passando um nome.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CompraController.Get">
+            <summary>
+             Listar todas as compras.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CompraController.Get(System.Int32)">
+            <summary>
+             Procura uma compra por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.CompraController.Post(APICasadeshow.Controllers.CompraTemp)">
+            <summary>
+             Efetua uma compra.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.Get">
+            <summary>
+             Listar todas os eventos.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.Get(System.Int32)">
+            <summary>
+             Listar em evento passando um ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.Post(APICasadeshow.Controllers.EventoTemp)">
+            <summary>
+             Criar um evento.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.Delete(System.Int32)">
+            <summary>
+             Excluir um evento passando um ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.Patch(APICasadeshow.Models.Evento)">
+            <summary>
+             Editar um evento passando um ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.CapacidadeAsc">
+            <summary>
+             Listar todos os eventos por capacidade em ordem crescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.CapacidadeDesc">
+            <summary>
+             Listar todos os eventos por capacidade em ordem decrescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.DataAsc">
+            <summary>
+             Listar todos os eventos por data em ordem crescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.DataDesc">
+            <summary>
+             Listar todos os eventos por data em ordem decrescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.NomeAsc">
+            <summary>
+             Listar todos os eventos por nome em ordem crescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.NomeDesc">
+            <summary>
+             Listar todos os eventos por nome em ordem decrescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.PrecoAsc">
+            <summary>
+             Listar todos os eventos por preço em ordem crescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.EventoController.PrecoDesc">
+            <summary>
+             Listar todos os eventos por preço em ordem decrescente.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.GeneroController.Get">
+            <summary>
+             Listar todos os gêneros.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.GeneroController.Get(System.Int32)">
+            <summary>
+             Lista gênero por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.GeneroController.Post(APICasadeshow.Controllers.GeneroTemp)">
+            <summary>
+             Criar gênero.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.GeneroController.Delete(System.Int32)">
+            <summary>
+             Excluir gênero por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.GeneroController.Patch(APICasadeshow.Models.Genero)">
+            <summary>
+             Editar gênero por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.UsuarioController.Get">
+            <summary>
+             Listar todos os usuários sem mostrar a senha.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.UsuarioController.Get(System.Int32)">
+            <summary>
+             Lista usuário por ID.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.UsuarioController.Registro(APICasadeshow.Models.Usuario)">
+            <summary>
+             Registrar um novo usuário.
+            </summary>
+        </member>
+        <member name="M:APICasadeshow.Controllers.UsuarioController.Login(APICasadeshow.Models.Usuario)">
+            <summary>
+             Logar em um usuário.
+            </summary>
+        </member>
+    </members>
+</doc>

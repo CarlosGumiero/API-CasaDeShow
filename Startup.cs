@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace APICasadeshow
 {
@@ -61,20 +63,24 @@ namespace APICasadeshow
                 {
                     Title = "API DE CASA DE SHOW",
                     Version = "v1",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
+                    Description = "API aberta para acessar informações do projeto MVC",
+                    // TermsOfService = new Uri("https://github.com/CarlosGumiero"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Shayne Boyer",
+                        Name = "Carlos Gumiero GitHub",
                         Email = string.Empty,
-                        Url = new Uri("https://twitter.com/spboyer"),
+                        Url = new Uri("https://github.com/CarlosGumiero"),
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license"),
+                        Name = "LinkedIn",
+                        Url = new Uri("https://www.linkedin.com/in/carlos-gumiero-011170161/"),
                     }
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                config.IncludeXmlComments(xmlPath);
             });
         }
 

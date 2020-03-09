@@ -26,6 +26,9 @@ namespace APICasadeshow.Controllers
 
         }
 
+        ///<summary>
+        /// Listar todas os eventos.
+        ///</summary>
         [HttpGet]
         public IActionResult Get()
         {
@@ -51,6 +54,9 @@ namespace APICasadeshow.Controllers
             return Ok(eventosHateoas);
         }
 
+        ///<summary>
+        /// Listar em evento passando um ID.
+        ///</summary>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -71,6 +77,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Criar um evento.
+        ///</summary>
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Post([FromBody] EventoTemp eTemp)
@@ -151,6 +160,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Excluir um evento passando um ID.
+        ///</summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
@@ -169,6 +181,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Editar um evento passando um ID.
+        ///</summary>
         [HttpPatch]
         [Authorize(Roles = "admin")]
         public IActionResult Patch([FromBody] Evento evento)
@@ -248,6 +263,86 @@ namespace APICasadeshow.Controllers
                 Response.StatusCode = 400;
                 return new ObjectResult(new { msg = "Id do produto é inválido" });
             }
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por capacidade em ordem crescente.
+        ///</summary>
+        [HttpGet("capacidade/" + "asc")]
+        public IActionResult CapacidadeAsc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderBy(x => x.Capacidade));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por capacidade em ordem decrescente.
+        ///</summary>
+        [HttpGet("capacidade/" + "desc")]
+        public IActionResult CapacidadeDesc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderByDescending(x => x.Capacidade));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por data em ordem crescente.
+        ///</summary>
+        [HttpGet("data/" + "asc")]
+        public IActionResult DataAsc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderBy(x => x.Data));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por data em ordem decrescente.
+        ///</summary>
+        [HttpGet("data/" + "desc")]
+        public IActionResult DataDesc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderByDescending(x => x.Data));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por nome em ordem crescente.
+        ///</summary>
+        [HttpGet("nome/" + "asc")]
+        public IActionResult NomeAsc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderBy(x => x.Nome));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por nome em ordem decrescente.
+        ///</summary>
+        [HttpGet("nome/" + "desc")]
+        public IActionResult NomeDesc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderByDescending(x => x.Nome));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por preço em ordem crescente.
+        ///</summary>
+        [HttpGet("preco/" + "asc")]
+        public IActionResult PrecoAsc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderBy(x => x.PrecoIngresso));
+        }
+
+        ///<summary>
+        /// Listar todos os eventos por preço em ordem decrescente.
+        ///</summary>
+        [HttpGet("preco/" + "desc")]
+        public IActionResult PrecoDesc()
+        {
+            var evento = database.Evento.ToList();
+            return Ok(evento.OrderByDescending(x => x.PrecoIngresso));
         }
     }
 

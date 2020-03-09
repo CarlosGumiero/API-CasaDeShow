@@ -26,6 +26,9 @@ namespace APICasadeshow.Controllers
             Hateoas.AddAction("EDIT_PRODUCT", "PATCH");
         }
 
+        ///<summary>
+        /// Listar todas as compras.
+        ///</summary>
         [HttpGet]
         public IActionResult Get()
         {
@@ -52,6 +55,9 @@ namespace APICasadeshow.Controllers
             return Ok(comprasHateoas);
         }
 
+        ///<summary>
+        /// Procura uma compra por ID.
+        ///</summary>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -69,10 +75,13 @@ namespace APICasadeshow.Controllers
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("Evento não encontrado!");
+                return new ObjectResult("Compra não encontrada!");
             }
         }
 
+        ///<summary>
+        /// Efetua uma compra.
+        ///</summary>
         [HttpPost]
         public IActionResult Post([FromBody] CompraTemp compraTemp)
         {
@@ -81,13 +90,13 @@ namespace APICasadeshow.Controllers
                 Response.StatusCode = 400;
                 return new ObjectResult(new { msg = "Não há eventos cadastrados!" });
             }
-            
+
             database.Evento.ToList();
             database.CasaDeShow.ToList();
             database.Genero.ToList();
 
-            // try
-            // {
+            try
+            {
                 // validation
 
                 Compra c = new Compra();
@@ -106,23 +115,19 @@ namespace APICasadeshow.Controllers
 
                 Response.StatusCode = 201;
                 return new ObjectResult("Compra realizada com sucesso!");
-            // }
-            // catch (Exception)
-            // {
-            //     Response.StatusCode = 404;
-            //     return new ObjectResult("Compra inválida!");
-            // }
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = 404;
+                return new ObjectResult("Compra inválida!");
+            }
         }
     }
-     
+
     public class CompraTemp
     {
-        public int CompraId { get; set; }
-        public DateTime Data { get; set; }
         public int QtdIngressos { get; set; }
-        public float Total { get; set; }
         public Evento Evento { get; set; }
-        public Usuario Usuario { get; set; }
     }
 
     public class CompraContainer

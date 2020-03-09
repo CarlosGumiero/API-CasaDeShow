@@ -125,3 +125,5 @@ C:\Users\CLGS\Documents\APICasadeshow\obj\Debug\netcoreapp3.1\APICasadeshow.dll
 C:\Users\CLGS\Documents\APICasadeshow\obj\Debug\netcoreapp3.1\APICasadeshow.pdb
 C:\Users\CLGS\Documents\APICasadeshow\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 C:\Users\CLGS\Documents\APICasadeshow\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\CLGS\Documents\APICasadeshow\bin\Debug\netcoreapp3.1\APICasadeshow.xml
+C:\Users\CLGS\Documents\APICasadeshow\obj\Debug\netcoreapp3.1\APICasadeshow.xml

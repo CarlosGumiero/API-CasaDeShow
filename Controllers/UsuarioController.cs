@@ -23,6 +23,39 @@ namespace APICasadeshow.Controllers
             this.database = database;
         }
 
+        ///<summary>
+        /// Listar todos os usuários sem mostrar a senha.
+        ///</summary>
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var usuarios = database.Usuario.Select(p => p.Email).ToList();
+
+            return Ok(usuarios);
+        }
+
+        ///<summary>
+        /// Lista usuário por ID.
+        ///</summary>
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                Usuario usuario = database.Usuario.First(x => x.UsuarioId == id);
+                usuario.Senha = "*******";
+                return Ok(usuario);
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = 404;
+                return new ObjectResult("Usuário inválido!");
+            }
+        }
+
+        ///<summary>
+        /// Registrar um novo usuário.
+        ///</summary>
         //apicasadeshow/v1/usuario/registro
         [HttpPost("registro")]
         public IActionResult Registro([FromBody] Usuario usuario)
@@ -58,6 +91,9 @@ namespace APICasadeshow.Controllers
             }
         }
 
+        ///<summary>
+        /// Logar em um usuário.
+        ///</summary>
         [HttpPost("Login")]
         public IActionResult Login([FromBody] Usuario credenciais)
         {
@@ -122,5 +158,12 @@ namespace APICasadeshow.Controllers
             }
 
         }
+    }
+
+    public class UserTemp
+    {
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public string Role { get; set; }
     }
 }
